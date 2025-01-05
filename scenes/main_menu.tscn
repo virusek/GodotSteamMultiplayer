@@ -1,0 +1,87 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1u0jj2clvnwh"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_0hr01"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0hr01")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -16.0
+offset_top = -11.0
+offset_right = 1170.0
+offset_bottom = 658.0
+
+[node name="CenterContainer" type="FlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -52.5
+offset_right = 100.0
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="HostButton" type="Button" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Host
+"
+
+[node name="JoinButton" type="Button" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Join
+"
+
+[node name="QuitButton" type="Button" parent="CenterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit
+"
+
+[node name="GameTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -159.0
+offset_right = 173.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "TEST GAME
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="UsernameLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Username: None"
+
+[connection signal="pressed" from="CenterContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CenterContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="CenterContainer/QuitButton" to="." method="_on_quit_button_pressed"]
