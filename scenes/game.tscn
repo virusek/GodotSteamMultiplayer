@@ -62,14 +62,14 @@ shader = ExtResource("5_ym8on")
 shader_parameter/transparency_factor = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3djjw"]
-size = Vector2(98.25, 56.375)
+size = Vector2(56, 29.3755)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yb53v"]
 shader = ExtResource("5_ym8on")
 shader_parameter/transparency_factor = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m5aa4"]
-size = Vector2(169, 67)
+size = Vector2(85, 30)
 
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
@@ -101,7 +101,7 @@ y_sort_enabled = true
 material = SubResource("ShaderMaterial_jdyol")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bush1"]
-position = Vector2(432, 243.188)
+position = Vector2(432, 256.688)
 shape = SubResource("RectangleShape2D_3djjw")
 
 [node name="Icon" type="Sprite2D" parent="Bush1"]
@@ -109,7 +109,7 @@ texture_filter = 1
 texture_repeat = 1
 use_parent_material = true
 position = Vector2(433, 271)
-scale = Vector2(5, 5)
+scale = Vector2(3, 3)
 texture = ExtResource("6_15lwm")
 offset = Vector2(0, -16)
 
@@ -122,10 +122,10 @@ texture_filter = 1
 texture_repeat = 1
 use_parent_material = true
 position = Vector2(899, 350)
-scale = Vector2(5, 5)
+scale = Vector2(3, 3)
 texture = ExtResource("6_le5s5")
 offset = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bush2"]
-position = Vector2(899.5, 323.5)
+position = Vector2(898.5, 336)
 shape = SubResource("RectangleShape2D_m5aa4")

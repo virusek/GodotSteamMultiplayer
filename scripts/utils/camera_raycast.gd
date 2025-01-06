@@ -1,8 +1,12 @@
 extends RayCast2D
 
 var last_collider
+@export var isDisabled = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	if isDisabled:
+		return
+	
 	if !is_colliding():
 		if last_collider != null:
 			resetTransparency(last_collider)

@@ -21,7 +21,7 @@ func _ready() -> void:
 	Steam.join_requested.connect(on_join_requested)
 	print("Steam is running")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	Steam.run_callbacks()
 
 func getUsername() -> String:
@@ -34,8 +34,8 @@ func hostLobby():
 	peer.create_host(0)
 	multiplayer.multiplayer_peer = peer
 
-func on_host_lobby_created(connect, id):
-	if connect:
+func on_host_lobby_created(connection, id):
+	if connection:
 		lobby_id = id
 		Steam.setLobbyData(id, "name", getUsername()+"'s Lobby")
 		Steam.setLobbyJoinable(id, true)
@@ -44,7 +44,7 @@ func on_host_lobby_created(connect, id):
 func joinLobby(lobby):
 	Steam.joinLobby(lobby)
 
-func on_lobby_joined(lobby, perms, locked, response):
+func on_lobby_joined(lobby, _perms, _locked, _response):
 	print(lobby)
 	var id := Steam.getLobbyOwner(lobby)
 	if id == Steam.getSteamID():
@@ -55,7 +55,7 @@ func on_lobby_joined(lobby, perms, locked, response):
 	SceneManager.start_game()
 	pass
 
-func on_join_requested(lobby, acc):
+func on_join_requested(lobby, _acc):
 	print("Join Requested!")
 	joinLobby(lobby)
 	pass

@@ -41,13 +41,14 @@ func change_direction(nextdir):
 
 func rotatePlayer():
 	var mouse_pos = get_viewport().get_mouse_position()
-	var view_size = get_viewport().size
+	var view_size = get_viewport().get_visible_rect().size
+	
 	var center = Vector2(view_size.x / 2, view_size.y / 2)
 	var relative = mouse_pos - center
-	var rad_to_deg = 57.2957795131
+	var rad_deg = 57.2957795
 	var angle = Vector2.RIGHT.angle_to_point(relative)
 	
-	var degrees = angle * rad_to_deg
+	var degrees = angle * rad_deg
 	
 	if -150 < degrees and degrees < -30:
 		change_direction(Direction.UP)
@@ -66,7 +67,7 @@ func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority():
 		return
 	
-	var velocity: Vector2 = Vector2(0.0, 0.0)
+	velocity = Vector2(0.0, 0.0)
 	
 	if Input.is_action_pressed("MoveUp"):
 		velocity.y -= 1
@@ -76,6 +77,11 @@ func _physics_process(delta: float) -> void:
 		velocity.x += 1
 	if Input.is_action_pressed("MoveLeft"):
 		velocity.x -= 1
+		
+	#TODO: FIX
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().quit()
+		
 		
 	rotatePlayer()
 	

@@ -22,7 +22,14 @@ SceneManager="*res://prefabs/managers/scene_manager.tscn"
 
 [display]
 
-window/size/resizable=false
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/initial_position_type=3
+window/size/initial_screen=2
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+window/stretch/mode="viewport"
+window/stretch/scale=0.5
 
 [dotnet]
 
