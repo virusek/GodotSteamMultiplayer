@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SteamManager="*res://prefabs/steam_manager.tscn"
-SceneManager="*res://prefabs/scene_manager.tscn"
+SteamManager="*res://prefabs/managers/steam_manager.tscn"
+SceneManager="*res://prefabs/managers/scene_manager.tscn"
 
 [display]
 

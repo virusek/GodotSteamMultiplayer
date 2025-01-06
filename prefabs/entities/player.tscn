@@ -1,15 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3m1fsqhkwpja"]
+[gd_scene load_steps=9 format=3 uid="uid://d3m1fsqhkwpja"]
 
-[ext_resource type="Texture2D" uid="uid://beef4k8sea8dq" path="res://assets/PLAYER/player_front.png" id="1_ds2vx"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_hdm6w"]
-[ext_resource type="Texture2D" uid="uid://ct6ri3tgn5fu7" path="res://assets/PLAYER/player_back.png" id="2_flimp"]
-[ext_resource type="Texture2D" uid="uid://bixlunxkggcou" path="res://assets/PLAYER/player_side.png" id="4_qrdod"]
+[ext_resource type="Script" path="res://scripts/entities/player.gd" id="1_gwea5"]
+[ext_resource type="Texture2D" uid="uid://ct6ri3tgn5fu7" path="res://assets/PLAYER/player_back.png" id="2_0e5wd"]
+[ext_resource type="Texture2D" uid="uid://beef4k8sea8dq" path="res://assets/PLAYER/player_front.png" id="3_73pki"]
+[ext_resource type="Texture2D" uid="uid://bixlunxkggcou" path="res://assets/PLAYER/player_side.png" id="4_84teb"]
+[ext_resource type="PackedScene" uid="uid://c3oqsflayck6v" path="res://prefabs/utils/camera_raycast.tscn" id="5_jjdau"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e0kew"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_flimp")
+"texture": ExtResource("2_0e5wd")
 }],
 "loop": true,
 "name": &"back",
@@ -17,7 +18,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ds2vx")
+"texture": ExtResource("3_73pki")
 }],
 "loop": true,
 "name": &"front",
@@ -25,7 +26,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_qrdod")
+"texture": ExtResource("4_84teb")
 }],
 "loop": true,
 "name": &"side",
@@ -44,7 +45,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_hdm6w")
+script = ExtResource("1_gwea5")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -62,3 +63,8 @@ disabled = true
 replication_config = SubResource("SceneReplicationConfig_vp118")
 
 [node name="MainCamera" type="Camera2D" parent="."]
+
+[node name="CameraRayCast" parent="." instance=ExtResource("5_jjdau")]
+position = Vector2(0, -60)
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

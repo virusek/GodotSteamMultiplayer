@@ -18,7 +18,6 @@ func _ready() -> void:
 	
 	Steam.lobby_created.connect(on_host_lobby_created)
 	Steam.lobby_joined.connect(on_lobby_joined)
-	Steam.lobby_invite.connect(on_lobby_invite)
 	Steam.join_requested.connect(on_join_requested)
 	print("Steam is running")
 
@@ -42,6 +41,9 @@ func on_host_lobby_created(connect, id):
 		Steam.setLobbyJoinable(id, true)
 		print("Successfully created a steam lobby")
 
+func joinLobby(lobby):
+	Steam.joinLobby(lobby)
+
 func on_lobby_joined(lobby, perms, locked, response):
 	print(lobby)
 	var id := Steam.getLobbyOwner(lobby)
@@ -49,16 +51,11 @@ func on_lobby_joined(lobby, perms, locked, response):
 		return
 	peer.create_client(id, 0)
 	multiplayer.multiplayer_peer = peer
-	
-	#TODO: Fix scene changes
-	SceneManager.start_game()
-	pass
 
-func on_lobby_invite(inviter, lobby, game):
-	print(inviter)
+	SceneManager.start_game()
 	pass
 
 func on_join_requested(lobby, acc):
 	print("Join Requested!")
-	Steam.joinLobby(lobby)
+	joinLobby(lobby)
 	pass

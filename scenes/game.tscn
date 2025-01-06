@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://dr2c3w7omwmv"]
+[gd_scene load_steps=13 format=4 uid="uid://dr2c3w7omwmv"]
 
-[ext_resource type="PackedScene" uid="uid://d3m1fsqhkwpja" path="res://prefabs/player.tscn" id="1_eid4t"]
-[ext_resource type="Texture2D" uid="uid://mv0aid1omyh7" path="res://icon.svg" id="2_i1u3u"]
+[ext_resource type="PackedScene" uid="uid://d3m1fsqhkwpja" path="res://prefabs/entities/player.tscn" id="1_eid4t"]
 [ext_resource type="Texture2D" uid="uid://usmaeo3vbtgq" path="res://assets/NORMAL/tilesets/plains.png" id="3_0n25w"]
-[ext_resource type="Script" path="res://scripts/game_multi_spawner.gd" id="3_88gp3"]
+[ext_resource type="Script" path="res://scripts/spawners/game_multi_spawner.gd" id="3_88gp3"]
+[ext_resource type="Shader" path="res://materials/transparency.gdshader" id="5_ym8on"]
+[ext_resource type="Texture2D" uid="uid://dbafreqqecks3" path="res://assets/TEMPBUSH/bush.png" id="6_15lwm"]
+[ext_resource type="Texture2D" uid="uid://05qx7q7p8pyb" path="res://assets/TEMPBUSH/pixil-frame-0_2.png" id="6_le5s5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_utrxh"]
 texture = ExtResource("3_0n25w")
@@ -55,6 +57,20 @@ texture = ExtResource("3_0n25w")
 [sub_resource type="TileSet" id="TileSet_g4fha"]
 sources/2 = SubResource("TileSetAtlasSource_utrxh")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jdyol"]
+shader = ExtResource("5_ym8on")
+shader_parameter/transparency_factor = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3djjw"]
+size = Vector2(98.25, 56.375)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yb53v"]
+shader = ExtResource("5_ym8on")
+shader_parameter/transparency_factor = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m5aa4"]
+size = Vector2(169, 67)
+
 [node name="Game" type="Node2D"]
 y_sort_enabled = true
 
@@ -72,17 +88,44 @@ tile_map_data = PackedByteArray("AAATAP//AgACAAEAAAATAAAAAgACAAEAAAATAAEAAgACAAE
 tile_set = SubResource("TileSet_g4fha")
 metadata/_edit_lock_ = true
 
-[node name="Icon2" type="Sprite2D" parent="."]
-position = Vector2(891, 352)
-texture = ExtResource("2_i1u3u")
-offset = Vector2(0, -64)
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(433, 271)
-texture = ExtResource("2_i1u3u")
-offset = Vector2(0, -64)
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath(".")
+spawn_path = NodePath("../Network")
 script = ExtResource("3_88gp3")
 player_scene = ExtResource("1_eid4t")
+
+[node name="Network" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Bush1" type="Area2D" parent="."]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_jdyol")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bush1"]
+position = Vector2(432, 243.188)
+shape = SubResource("RectangleShape2D_3djjw")
+
+[node name="Icon" type="Sprite2D" parent="Bush1"]
+texture_filter = 1
+texture_repeat = 1
+use_parent_material = true
+position = Vector2(433, 271)
+scale = Vector2(5, 5)
+texture = ExtResource("6_15lwm")
+offset = Vector2(0, -16)
+
+[node name="Bush2" type="Area2D" parent="."]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_yb53v")
+
+[node name="Icon" type="Sprite2D" parent="Bush2"]
+texture_filter = 1
+texture_repeat = 1
+use_parent_material = true
+position = Vector2(899, 350)
+scale = Vector2(5, 5)
+texture = ExtResource("6_le5s5")
+offset = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bush2"]
+position = Vector2(899.5, 323.5)
+shape = SubResource("RectangleShape2D_m5aa4")

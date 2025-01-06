@@ -39,8 +39,28 @@ func change_direction(nextdir):
 		%Sprite.animation = "side"
 	curr_dir = nextdir
 
+func rotatePlayer():
+	var mouse_pos = get_viewport().get_mouse_position()
+	var view_size = get_viewport().size
+	var center = Vector2(view_size.x / 2, view_size.y / 2)
+	var relative = mouse_pos - center
+	var rad_to_deg = 57.2957795131
+	var angle = Vector2.RIGHT.angle_to_point(relative)
+	
+	var degrees = angle * rad_to_deg
+	
+	if -150 < degrees and degrees < -30:
+		change_direction(Direction.UP)
+	elif -30 < degrees and degrees < 30:
+		change_direction(Direction.RIGHT)
+	elif 30 < degrees and degrees < 150:
+		change_direction(Direction.DOWN)
+	else:
+		change_direction(Direction.LEFT)
+
 func _ready() -> void:
 	cam.enabled = is_multiplayer_authority()
+	print(get_parent())
 
 func _physics_process(delta: float) -> void:
 	if !is_multiplayer_authority():
@@ -48,18 +68,16 @@ func _physics_process(delta: float) -> void:
 	
 	var velocity: Vector2 = Vector2(0.0, 0.0)
 	
-	if Input.is_action_pressed("MoveRight"):
-		change_direction(Direction.RIGHT)
-		velocity.x += 1
-	if Input.is_action_pressed("MoveLeft"):
-		change_direction(Direction.LEFT)
-		velocity.x -= 1
 	if Input.is_action_pressed("MoveUp"):
-		change_direction(Direction.UP)
 		velocity.y -= 1
 	if Input.is_action_pressed("MoveDown"):
-		change_direction(Direction.DOWN)
 		velocity.y += 1
+	if Input.is_action_pressed("MoveRight"):
+		velocity.x += 1
+	if Input.is_action_pressed("MoveLeft"):
+		velocity.x -= 1
+		
+	rotatePlayer()
 	
 	if velocity.length() > 0.0:
 		velocity = velocity.normalized()
