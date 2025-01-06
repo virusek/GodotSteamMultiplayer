@@ -18,6 +18,8 @@ func _ready() -> void:
 	
 	Steam.lobby_created.connect(on_host_lobby_created)
 	Steam.lobby_joined.connect(on_lobby_joined)
+	Steam.lobby_invite.connect(on_lobby_invite)
+	Steam.join_requested.connect(on_join_requested)
 	print("Steam is running")
 
 func _process(delta: float) -> void:
@@ -50,4 +52,13 @@ func on_lobby_joined(lobby, perms, locked, response):
 	
 	#TODO: Fix scene changes
 	SceneManager.start_game()
+	pass
+
+func on_lobby_invite(inviter, lobby, game):
+	print(inviter)
+	pass
+
+func on_join_requested(lobby, acc):
+	print("Join Requested!")
+	Steam.joinLobby(lobby)
 	pass

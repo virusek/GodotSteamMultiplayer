@@ -56,6 +56,7 @@ animation = &"front"
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(1, -30)
 shape = SubResource("RectangleShape2D_472k2")
+disabled = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_vp118")
