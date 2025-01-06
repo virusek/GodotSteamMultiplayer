@@ -12,13 +12,15 @@ grow_vertical = 2
 script = ExtResource("1_0hr01")
 
 [node name="Background" type="Panel" parent="."]
-layout_mode = 0
-offset_left = -16.0
-offset_top = -11.0
-offset_right = 1170.0
-offset_bottom = 658.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="CenterContainer" type="FlowContainer" parent="."]
+[node name="ButtonContainer" type="FlowContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,42 +35,70 @@ grow_horizontal = 2
 grow_vertical = 2
 vertical = true
 
-[node name="HostButton" type="Button" parent="CenterContainer"]
-unique_name_in_owner = true
+[node name="HostButton" type="Button" parent="ButtonContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 text = "Host
 "
 
-[node name="JoinButton" type="Button" parent="CenterContainer"]
-unique_name_in_owner = true
+[node name="JoinButton" type="Button" parent="ButtonContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
-disabled = true
 text = "Join
 "
 
-[node name="QuitButton" type="Button" parent="CenterContainer"]
-unique_name_in_owner = true
+[node name="QuitButton" type="Button" parent="ButtonContainer"]
 custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Quit
 "
 
-[node name="GameTitle" type="Label" parent="."]
+[node name="LobbyContainer" type="FlowContainer" parent="."]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -171.0
-offset_top = -159.0
-offset_right = 173.0
-offset_bottom = -71.0
+offset_left = -101.0
+offset_top = -66.0
+offset_right = 107.0
+offset_bottom = 134.0
 grow_horizontal = 2
 grow_vertical = 2
+vertical = true
+
+[node name="BackButton" type="Button" parent="LobbyContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+text = "Back
+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LobbyContainer"]
+custom_minimum_size = Vector2(100, 150)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="LobbyListContainer" type="VBoxContainer" parent="LobbyContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GameTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -174.0
+offset_top = 25.0
+offset_right = 170.0
+offset_bottom = 113.0
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 64
 text = "TEST GAME
 "
@@ -79,10 +109,11 @@ uppercase = true
 [node name="UsernameLabel" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-offset_right = 40.0
+offset_right = 130.0
 offset_bottom = 23.0
 text = "Username: None"
 
-[connection signal="pressed" from="CenterContainer/HostButton" to="." method="_on_host_button_pressed"]
-[connection signal="pressed" from="CenterContainer/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="CenterContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="LobbyContainer/BackButton" to="." method="_on_back_button_pressed"]
